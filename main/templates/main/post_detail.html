@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+
+{% block blkContent %}
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+            <a class="mr-2" href="#">{{ oject.author }}</a>
+                <small class="text-muted">{{ object.date_posted|date:"F d Y" }}</small>
+            </div>
+            <h2 class="article-title">{{ object.title }}</h2>
+            {% if post.imgRide.url != "/media/0" %}
+                <img src="{{ post.imgRide.url }}"></img>                
+            {% endif %}
+            <p class="article-content">{{ object.description }}</p>
+        </div>
+    </article>   
+
+{% endblock blkContent %}
