@@ -13,21 +13,23 @@ from .forms import postUpdateForm, PostCreateForm
 
 
 def home(request):
-    dictContext = {
-        'keyPosts': Post.objects.all()
+    current_user = str(request.user)
+    filter_user = Post.objects.filter(author__username__iexact=current_user)
+    Context = {
+        'keyPosts': filter_user
     }
 
-    return render(request,'main/home.html', dictContext)
+    return render(request,'main/home.html', Context)
 
 
-class PostListView(ListView):
-    model = Post
+# class PostListView(ListView):
+#     model = Post
 
-    # defaults to: <app>/<model>_<viewtype>.html
-    template_name = 'main/home.html'
+#     # defaults to: <app>/<model>_<viewtype>.html
+#     template_name = 'main/home.html'
 
-    context_object_name = 'keyPosts'
-    ordering = ['-date_posted']
+#     context_object_name = 'keyPosts'
+#     ordering = ['-date_posted']
 
 
 class PostDetailView(DetailView):
