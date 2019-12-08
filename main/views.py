@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
@@ -8,7 +8,7 @@ from django.views.generic import (
         UpdateView
     )
 from .models import Post
-from .forms import postUpdateForm
+from .forms import postUpdateForm, PostCreateForm
 
 
 
@@ -34,19 +34,22 @@ class PostDetailView(DetailView):
     model = Post
 
     # defaults to: <app>/<model>_<viewtype>.html
-    
-class PostCreateView(LoginRequiredMixin, CreateView):
-    model = Post
 
-    # url defaults to: <app>/<model>_<viewtype>.html
 
-    fields = ['title', 'imgRide', 'description']
-    #fields = ['title', 'description']
+def PostCreateView(request):
+    if request.method == 'POST':
+        form = PostCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            form_post  = form.save(commit=False)
+            form_post.author = request.user
+            form_post.save()
+        return redirect('main_view')
+    else:
+        form = PostCreateForm()
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-    
+    return render(request, "main/post_form.html", {'form': form })
+
+
 def PostUpdateView(request):
 
     if request.method == 'POST':

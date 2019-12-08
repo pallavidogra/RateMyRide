@@ -1,22 +1,18 @@
 {% extends "main/base.html" %}
 
 {% block blkContent %}
+  
   {% for post in keyPosts %}
     <article class="media content-section col-lg-4 post-artcle">
+      <a class="article-title" href="{% url 'post-detail' post.id %}">
         <div class="media-body">
-          {% if post.imgRide.url %}
+          {% if post.imgRide %}
             <img class="post-image" src="{{ post.imgRide.url }}"></img>                
-          {% endif %}              
-     <!--      <div class="article-metadata">
-            <a class="mr-2" href="#">{{ post.author }}</a>
-            <small class="text-muted">{{ post.date_posted|date:"F d Y" }}</small>
-          </div> -->
-          <!-- <h2> -->
-            <!-- <a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a> -->
-          <!-- </h2> -->
-          
-          <!-- <p class="article-content">{{ post.description }}</p> -->
+          {% endif %}  
+          <h5>{{ post.title }}</h5>
         </div>
+      </a>
     </article> 
   {% endfor %}
+
 {% endblock blkContent %}

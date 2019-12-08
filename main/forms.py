@@ -17,3 +17,10 @@ class postUpdateForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['imgRide']
+
+
+class PostCreateForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = '__all__'
+        exclude = ['author']

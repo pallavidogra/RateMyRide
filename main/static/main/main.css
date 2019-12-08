@@ -94,6 +94,5 @@ a.article-title:hover {
 }
 
 .post-image:hover {
-  width: 105%;
   cursor: pointer;
 }
