@@ -1,18 +1,11 @@
 {% extends "main/base.html" %}
-<style type="text/css">
-  .post-artcle{
-    float: left !important; 
-  }
-</style>
 
 {% block blkContent %}
-  
-      
-    {% for post in keyPosts %}
-    <article class="media content-section col-lg-4 post-artcle" style="float: left; width: 32%;margin-left: 1%;">
+  {% for post in keyPosts %}
+    <article class="media content-section col-lg-4 post-artcle">
         <div class="media-body">
           {% if post.imgRide.url %}
-            <img class="post-image" src="{{ post.imgRide.url }}" style="width: 100%;"></img>                
+            <img class="post-image" src="{{ post.imgRide.url }}"></img>                
           {% endif %}              
      <!--      <div class="article-metadata">
             <a class="mr-2" href="#">{{ post.author }}</a>
@@ -25,6 +18,5 @@
           <!-- <p class="article-content">{{ post.description }}</p> -->
         </div>
     </article> 
-    {% endfor %}
- 
+  {% endfor %}
 {% endblock blkContent %}
