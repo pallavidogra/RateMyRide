@@ -14,7 +14,12 @@ from .forms import postUpdateForm, PostCreateForm
 
 def home(request):
     current_user = str(request.user)
-    filter_user = Post.objects.filter(author__username__iexact=current_user)
+
+    if current_user == 'AnonymousUser':
+        filter_user = Post.objects.all()
+    else:
+        filter_user = Post.objects.filter(author__username__iexact=current_user)
+
     Context = {
         'keyPosts': filter_user
     }
