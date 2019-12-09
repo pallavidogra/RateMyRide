@@ -2,7 +2,6 @@
 
 {% block blkContent %}
   
-  {% if keyPosts%}
     <!-- Grid row -->
     <div class="gallery" id="gallery">
       {% for post in keyPosts %}
@@ -15,8 +14,6 @@
         </a>
       {% endfor %}
     </div>
-  {% else %}
-    <h5>You have not added any post yet</h5>
-  {% endif %}
+
   
 {% endblock blkContent %}
