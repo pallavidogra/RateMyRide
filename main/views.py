@@ -13,19 +13,23 @@ from .forms import postUpdateForm, PostCreateForm
 
 
 def home(request):
-    current_user = str(request.user)
-
-    if current_user == 'AnonymousUser':
-        filter_user = Post.objects.all()
-    else:
-        filter_user = Post.objects.filter(author__username__iexact=current_user)
-
-    Context = {
-        'keyPosts': filter_user
+    all_posts = Post.objects.all()
+    
+    context = {
+        'keyPosts': all_posts
     }
 
-    return render(request,'main/home.html', Context)
+    return render(request,'main/home.html', context)
 
+def my_post(request):
+    current_user = str(request.user)
+    filtered_posts = Post.objects.filter(author__username__iexact=current_user)
+
+    context = {
+        'keyPosts': filtered_posts
+    }
+
+    return render(request,'main/home.html', context)
 
 # class PostListView(ListView):
 #     model = Post
