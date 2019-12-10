@@ -1,14 +1,17 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Post
 from django.views.generic import (
         ListView,
         DetailView,
         CreateView,
         UpdateView
     )
-from .models import Post
-from .forms import postUpdateForm, PostCreateForm
+from .forms import (
+        postUpdateForm, 
+        PostCreateForm
+    )
 
 
 
