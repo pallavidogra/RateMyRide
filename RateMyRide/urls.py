@@ -32,8 +32,7 @@ urlpatterns = [
 ]
 
 
-#from django documentation
-#from tutorial "User Profile and Picture 22min"
+admin.site.site_header = 'Rate My Ride Admin'
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
