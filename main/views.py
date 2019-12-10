@@ -14,13 +14,13 @@ from .forms import (
     )
 
 
-
 def home(request):
     all_posts = Post.objects.all()
-    
+
     context = {
         'keyPosts': all_posts
     }
+    
 
     return render(request,'main/home.html', context)
 

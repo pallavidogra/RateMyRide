@@ -11,4 +11,10 @@ $( document ).ready(function() {
 			}, 300);
 		});
 	});
+    $(function() {
+        $('.pop').on('click', function() {
+        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+        $('#imagemodal').modal('show');   
+    });   
+  });
 });
