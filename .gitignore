@@ -2,6 +2,5 @@ media
 RateMyRide/__pycache__/
 main/__pycache__/
 main/migrations/__pycache__/
-main/templates/main/header.html
 users/__pycache__/
 users/migrations/__pycache__/
