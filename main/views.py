@@ -1,26 +1,38 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Post
 from django.views.generic import (
         ListView,
         DetailView,
         CreateView,
         UpdateView
     )
-from .models import Post
-from .forms import postUpdateForm, PostCreateForm
-
+from .forms import (
+        postUpdateForm, 
+        PostCreateForm
+    )
 
 
 def home(request):
+    all_posts = Post.objects.all()
+
+    context = {
+        'keyPosts': all_posts
+    }
+    
+
+    return render(request,'main/home.html', context)
+
+def my_post(request):
     current_user = str(request.user)
-    filter_user = Post.objects.filter(author__username__iexact=current_user)
-    Context = {
-        'keyPosts': filter_user
+    filtered_posts = Post.objects.filter(author__username__iexact=current_user)
+
+    context = {
+        'keyPosts': filtered_posts
     }
 
-    return render(request,'main/home.html', Context)
-
+    return render(request,'main/home.html', context)
 
 # class PostListView(ListView):
 #     model = Post

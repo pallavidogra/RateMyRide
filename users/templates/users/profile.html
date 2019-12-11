@@ -5,6 +5,7 @@
 {% block blkContent %}
 
     <div class="content-section">
+      <a class="my-posts-a" href="{% url 'my-post' %}"><h4>My Posts</h4></a>
       <div class="media">
         <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
         

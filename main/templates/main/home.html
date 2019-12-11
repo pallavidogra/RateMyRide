@@ -2,21 +2,34 @@
 
 {% block blkContent %}
   
-  {% if keyPosts%}
-    {% for post in keyPosts %}
-      <article class="media content-section col-lg-4 post-artcle">
-        <a class="article-title" href="{% url 'post-detail' post.id %}">
-          <div class="media-body">
-            {% if post.imgRide %}
-              <img class="post-image" src="{{ post.imgRide.url }}"></img>                
-            {% endif %}  
-            <h5>{{ post.title }}</h5>
-          </div>
+    <!-- Grid row -->
+    <div class="gallery" id="gallery">
+      {% for post in keyPosts %}
+        <a class="pop" href="#">
+           {% if post.imgRide %}               
+            <div class="mb-3 pics animation all 2">
+              <img class="img-fluid" src="{{ post.imgRide.url }}" alt="Card image cap">
+            </div>
+          {% endif %}  
         </a>
-      </article> 
-    {% endfor %}
-  {% else %}
-    <h5>You have not added any post yet</h5>
-  {% endif %}
-
+      {% endfor %}
+    </div>
+    
+    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog width-100">
+          <div class="modal-content width-100">              
+            <div class="modal-body width-100">
+              <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+              </button>
+              <img src="" class="imagepreview width-100">
+            </div>
+          </div>
+        </div>
+    </div>
+ 
 {% endblock blkContent %}
+
+  
+
