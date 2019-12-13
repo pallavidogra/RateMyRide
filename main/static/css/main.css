@@ -156,3 +156,9 @@ a.article-title:hover {
 .modal-right-div{
   float: left;
 }
+.modal-padding{
+  padding: 0px;
+}
+.modal-close{
+  padding: 16px !important;
+}
