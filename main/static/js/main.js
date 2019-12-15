@@ -29,6 +29,13 @@ $( document ).ready(function() {
 			$('.post-date-posted-p').text(post_text_date_posted)
 			$('.post-author-p').text(post_text_author)
 			$('#imagemodal').modal('show');
+			$('.icon').addClass('glyphicon glyphicon-chevron-right');
+			$('.icon').css('margin-top','55px');
+			$('.icon').css('float','right');
+			$('.icon').css('font-size','30px');
+			$('.icon-left').addClass('glyphicon glyphicon-chevron-left');
+			$('.icon-left').css('margin-top','215px');
+			$('.icon-left').css('font-size','30px');			
 		})
     }); 
 
