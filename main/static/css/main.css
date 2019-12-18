@@ -162,3 +162,14 @@ a.article-title:hover {
 .modal-close{
   padding: 16px !important;
 }
+
+.next{
+  margin-top:55px;
+  float:right;
+  font-size:30px;
+}
+
+.prev{
+  margin-top:215px;
+  font-size:30px;
+}
