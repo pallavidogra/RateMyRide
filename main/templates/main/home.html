@@ -1,24 +1,25 @@
 {% extends "main/base.html" %}
 
 {% block blkContent %}
+
   <!-- Grid row -->
   <div class="gallery" id="gallery">
     {% for post in keyPosts %}
-      <a class="pop"   data-toggle="modal" href="#" data-target="#imagemodal" title="edit item" data-tooltip>
+      <a class="pop" href="#" >
          {% if post.imgRide %}               
           <div class="mb-3 pics animation all 2">
             <img class="img-fluid custom-id" id="{{ post.id }}" src="{{ post.imgRide.url }}" alt="Card image cap">
           </div>
+        </a>
           <p class="post-title" id="post-title-{{ post.id }}" hidden>{{post.title}}</p>
           <p class="post-title" id="post-description-{{ post.id }}" hidden>{{post.description}}</p>
           <p class="post-title" id="post-date-posted-{{ post.id }}" hidden>{{post.date_posted}}</p>
-          <p class="post-title" id="post-author-{{ post.id }}" hidden>{{post.author}}</p>
-        {% endif %}  
-      </a>
+        {% endif %} 
     {% endfor %}
   </div>
 
-  <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="
+    myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg width-100">
       <div class="modal-content width-100">              
         <div class="modal-body width-100 modal-padding">
@@ -28,7 +29,7 @@
           </button>
           <div class="col-lg-12 modal-padding">
             <div class="col-lg-1 modal-right-div">
-              <a href="">
+              <a href="#">
                 <p class="prev">&lt;</p>
               </a>
             </div>            
@@ -40,7 +41,7 @@
               <p class="post-description-p"></p>
               <p class="post-date-posted-p"></p>
               <p class="post-author-p"></p>
-              <a href="">
+              <a href="#">
                 <p class="next">&gt;</p>
               </a>
             </div>
