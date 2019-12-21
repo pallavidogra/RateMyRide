@@ -11,6 +11,7 @@ class Post(models.Model):
     imgRide.verbose_name = "Your Ride"
     description = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
+    modified_date = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
