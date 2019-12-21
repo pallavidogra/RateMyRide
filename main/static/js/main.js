@@ -31,7 +31,7 @@ $( document ).ready(function() {
           $("#imagemodal").modal("show");
         },500);
       } else {
-        alert("You are on the last card!");
+        $('.next').hide();
       }
     });
     
@@ -44,7 +44,8 @@ $( document ).ready(function() {
           $("#imagemodal").modal("show");
         },500);
       } else {
-        alert("You are on the first card!");
+        $('.prev').hide();
+
       }
       
     });
