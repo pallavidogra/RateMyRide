@@ -15,7 +15,7 @@ from .forms import (
 
 
 def home(request):
-    all_posts = Post.objects.all().order_by('-modified_date')
+    all_posts = Post.objects.all().order_by('modified_date')
 
     context = {
         'keyPosts': all_posts
