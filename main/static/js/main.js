@@ -22,32 +22,39 @@ $( document ).ready(function() {
       openProfile = $(this);
     }); 
 
+
     $(".next").click(function(event){
       var cards = openProfile.parents('.gallery').find(".pop");
       var currentCardIndex = cards.index(openProfile);
-      if(cards.length > (currentCardIndex + 1)) {
-        cards.get(currentCardIndex + 1).click();
+      if(cards.length == currentCardIndex+1){
+        $('.prev').show(); 
+        $('.next').hide();          
+      }    
+      else if(cards.length > (currentCardIndex + 1)) {
+        $('.prev').show(); 
+        $('.next').show();  
+        cards.get(currentCardIndex + 1).click();        
         setTimeout(function() {
           $("#imagemodal").modal("show");
         },500);
-      } else {
-        $('.next').hide();
       }
     });
-    
+
     $(".prev").click(function(event){
       var cards = openProfile.parents('.gallery').find(".pop");
-      var currentCardIndex = cards.index(openProfile);
-      if(currentCardIndex > 0) {
-        cards.get(currentCardIndex - 1).click();
+      var currentCardIndex = cards.index(openProfile);     
+      if(currentCardIndex == 0){
+        $('.prev').hide(); 
+        $('.next').show();        
+      }         
+      else if(currentCardIndex > 0) {
+        $('.prev').show(); 
+        $('.next').show();         
+        cards.get(currentCardIndex - 1).click();             
         setTimeout(function() {
           $("#imagemodal").modal("show");
-        },500);
-      } else {
-        $('.prev').hide();
-
-      }
-      
+        },500);        
+      } 
     });
 });
 
