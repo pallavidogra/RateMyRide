@@ -164,12 +164,15 @@ a.article-title:hover {
 }
 
 .next{
-  margin-top:55px;
+  margin-top:75px;
   float:right;
-  font-size:30px;
+  font-size:40px;
+  margin-right: -45px !important;
 }
 
 .prev{
   margin-top:215px;
-  font-size:30px;
+  font-size:40px;
+  float: left;
+  margin-left: -45px !important;
 }
