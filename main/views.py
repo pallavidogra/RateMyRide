@@ -13,14 +13,12 @@ from .forms import (
         PostCreateForm
     )
 
-
 def home(request):
-    all_posts = Post.objects.all().order_by('modified_date')
+    all_posts = Post.objects.all().order_by('-id')
 
     context = {
         'keyPosts': all_posts
     }
-    
 
     return render(request,'main/home.html', context)
 
@@ -48,7 +46,6 @@ class PostDetailView(DetailView):
     model = Post
 
     # defaults to: <app>/<model>_<viewtype>.html
-
 
 def PostCreateView(request):
     if request.method == 'POST':
@@ -86,8 +83,5 @@ def PostUpdateView(request):
             #return super().form_valid(form)
         return render(request, 'main/form_update.html')
         
-
-
-
 def about(request):
     return render(request,'main/about.html', {'title': 'About'})

@@ -20,19 +20,26 @@ $( document ).ready(function() {
       $('#imagemodal').modal('show');
 
       openProfile = $(this);
-    }); 
-
-
-    $(".next").click(function(event){
       var cards = openProfile.parents('.gallery').find(".pop");
       var currentCardIndex = cards.index(openProfile);
       if(cards.length == currentCardIndex+1){
         $('.prev').show(); 
-        $('.next').hide();          
-      }    
+        $('.next').hide(); 
+      }
+      else if(currentCardIndex == 0){
+        $('.prev').hide(); 
+        $('.next').show();        
+      } 
       else if(cards.length > (currentCardIndex + 1)) {
         $('.prev').show(); 
-        $('.next').show();  
+        $('.next').show();
+      }
+    }); 
+
+    $(".next").click(function(event){
+      var cards = openProfile.parents('.gallery').find(".pop");
+      var currentCardIndex = cards.index(openProfile);
+      if(cards.length > (currentCardIndex + 1)) { 
         cards.get(currentCardIndex + 1).click();        
         setTimeout(function() {
           $("#imagemodal").modal("show");
@@ -42,14 +49,8 @@ $( document ).ready(function() {
 
     $(".prev").click(function(event){
       var cards = openProfile.parents('.gallery').find(".pop");
-      var currentCardIndex = cards.index(openProfile);     
-      if(currentCardIndex == 0){
-        $('.prev').hide(); 
-        $('.next').show();        
-      }         
-      else if(currentCardIndex > 0) {
-        $('.prev').show(); 
-        $('.next').show();         
+      var currentCardIndex = cards.index(openProfile);             
+      if(currentCardIndex > 0) {         
         cards.get(currentCardIndex - 1).click();             
         setTimeout(function() {
           $("#imagemodal").modal("show");
