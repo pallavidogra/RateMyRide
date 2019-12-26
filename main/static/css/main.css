@@ -169,6 +169,7 @@ a.article-title:hover {
   font-size:40px;
   margin-right: -45px !important;
   font-weight: bold !important;
+  color: #FFFFFF;
 }
 
 .prev{
@@ -177,4 +178,5 @@ a.article-title:hover {
   float: left;
   margin-left: -45px !important;
   font-weight: bold !important;  
+  color: #FFFFFF;
 }
