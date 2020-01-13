@@ -1,0 +1,278 @@
+#!/media/mandeep/MOVIES/KNOWLEDGE/Python/Django/Projects/Live/Rate/env/bin/python
+
+import sys
+import getopt
+import sysconfig
+
+valid_opts = ['prefix', 'exec-prefix', 'includes', 'libs', 'cflags',
+              'ldflags', 'help']
+
+if sys.version_info >= (3, 2):
+    valid_opts.insert(-1, 'extension-suffix')
+    valid_opts.append('abiflags')
+if sys.version_info >= (3, 3):
+    valid_opts.append('configdir')
+
+
+def exit_with_usage(code=1):
+    sys.stderr.write("Usage: {0} [{1}]\n".format(
+        sys.argv[0], '|'.join('--'+opt for opt in valid_opts)))
+    sys.exit(code)
+
+try:
+    opts, args = getopt.getopt(sys.argv[1:], '', valid_opts)
+except getopt.error:
+    exit_with_usage()
+
+if not opts:
+    exit_with_usage()
+
+pyver = sysconfig.get_config_var('VERSION')
+getvar = sysconfig.get_config_var
+
+opt_flags = [flag for (flag, val) in opts]
+
+if '--help' in opt_flags:
+    exit_with_usage(code=0)
+
+for opt in opt_flags:
+    if opt == '--prefix':
+        print(sysconfig.get_config_var('prefix'))
+
+    elif opt == '--exec-prefix':
+        print(sysconfig.get_config_var('exec_prefix'))
+
+    elif opt in ('--includes', '--cflags'):
+        flags = ['-I' + sysconfig.get_path('include'),
+                 '-I' + sysconfig.get_path('platinclude')]
+        if opt == '--cflags':
+            flags.extend(getvar('CFLAGS').split())
+        print(' '.join(flags))
+
+    elif opt in ('--libs', '--ldflags'):
+        abiflags = getattr(sys, 'abiflags', '')
+        libs = ['-lpython' + pyver + abiflags]
+        libs += getvar('LIBS').split()
+        libs += getvar('SYSLIBS').split()
+        # add the prefix/lib/pythonX.Y/config dir, but only if there is no
+        # shared library in prefix/lib/.
+        if opt == '--ldflags':
+            if not getvar('Py_ENABLE_SHARED'):
+                libs.insert(0, '-L' + getvar('LIBPL'))
+            if not getvar('PYTHONFRAMEWORK'):
+                libs.extend(getvar('LINKFORSHARED').split())
+        print(' '.join(libs))
+
+    elif opt == '--extension-suffix':
+        ext_suffix = sysconfig.get_config_var('EXT_SUFFIX')
+        if ext_suffix is None:
+            ext_suffix = sysconfig.get_config_var('SO')
+        print(ext_suffix)
+
+    elif opt == '--abiflags':
+        if not getattr(sys, 'abiflags', None):
+            exit_with_usage()
+        print(sys.abiflags)
+
+    elif opt == '--configdir':
+        print(sysconfig.get_config_var('LIBPL'))
+
+
+
+
+# Access WeakSet through the weakref module.
+# This code is separated-out because it is needed
+# by abc.py to load everything else at startup.
+
+from _weakref import ref
+
+__all__ = ['WeakSet']
+
+
+class _IterationGuard:
+    # This context manager registers itself in the current iterators of the
+    # weak container, such as to delay all removals until the context manager
+    # exits.
+    # This technique should be relatively thread-safe (since sets are).
+
+    def __init__(self, weakcontainer):
+        # Don't create cycles
+        self.weakcontainer = ref(weakcontainer)
+
+    def __enter__(self):
+        w = self.weakcontainer()
+        if w is not None:
+            w._iterating.add(self)
+        return self
+
+    def __exit__(self, e, t, b):
+        w = self.weakcontainer()
+        if w is not None:
+            s = w._iterating
+            s.remove(self)
+            if not s:
+                w._commit_removals()
+
+
+class WeakSet:
+    def __init__(self, data=None):
+        self.data = set()
+        def _remove(item, selfref=ref(self)):
+            self = selfref()
+            if self is not None:
+                if self._iterating:
+                    self._pending_removals.append(item)
+                else:
+                    self.data.discard(item)
+        self._remove = _remove
+        # A list of keys to be removed
+        self._pending_removals = []
+        self._iterating = set()
+        if data is not None:
+            self.update(data)
+
+    def _commit_removals(self):
+        l = self._pending_removals
+        discard = self.data.discard
+        while l:
+            discard(l.pop())
+
+    def __iter__(self):
+        with _IterationGuard(self):
+            for itemref in self.data:
+                item = itemref()
+                if item is not None:
+                    # Caveat: the iterator will keep a strong reference to
+                    # `item` until it is resumed or closed.
+                    yield item
+
+    def __len__(self):
+        return len(self.data) - len(self._pending_removals)
+
+    def __contains__(self, item):
+        try:
+            wr = ref(item)
+        except TypeError:
+            return False
+        return wr in self.data
+
+    def __reduce__(self):
+        return (self.__class__, (list(self),),
+                getattr(self, '__dict__', None))
+
+    def add(self, item):
+        if self._pending_removals:
+            self._commit_removals()
+        self.data.add(ref(item, self._remove))
+
+    def clear(self):
+        if self._pending_removals:
+            self._commit_removals()
+        self.data.clear()
+
+    def copy(self):
+        return self.__class__(self)
+
+    def pop(self):
+        if self._pending_removals:
+            self._commit_removals()
+        while True:
+            try:
+                itemref = self.data.pop()
+            except KeyError:
+                raise KeyError('pop from empty WeakSet')
+            item = itemref()
+            if item is not None:
+                return item
+
+    def remove(self, item):
+        if self._pending_removals:
+            self._commit_removals()
+        self.data.remove(ref(item))
+
+    def discard(self, item):
+        if self._pending_removals:
+            self._commit_removals()
+        self.data.discard(ref(item))
+
+    def update(self, other):
+        if self._pending_removals:
+            self._commit_removals()
+        for element in other:
+            self.add(element)
+
+    def __ior__(self, other):
+        self.update(other)
+        return self
+
+    def difference(self, other):
+        newset = self.copy()
+        newset.difference_update(other)
+        return newset
+    __sub__ = difference
+
+    def difference_update(self, other):
+        self.__isub__(other)
+    def __isub__(self, other):
+        if self._pending_removals:
+            self._commit_removals()
+        if self is other:
+            self.data.clear()
+        else:
+            self.data.difference_update(ref(item) for item in other)
+        return self
+
+    def intersection(self, other):
+        return self.__class__(item for item in other if item in self)
+    __and__ = intersection
+
+    def intersection_update(self, other):
+        self.__iand__(other)
+    def __iand__(self, other):
+        if self._pending_removals:
+            self._commit_removals()
+        self.data.intersection_update(ref(item) for item in other)
+        return self
+
+    def issubset(self, other):
+        return self.data.issubset(ref(item) for item in other)
+    __le__ = issubset
+
+    def __lt__(self, other):
+        return self.data < set(ref(item) for item in other)
+
+    def issuperset(self, other):
+        return self.data.issuperset(ref(item) for item in other)
+    __ge__ = issuperset
+
+    def __gt__(self, other):
+        return self.data > set(ref(item) for item in other)
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.data == set(ref(item) for item in other)
+
+    def symmetric_difference(self, other):
+        newset = self.copy()
+        newset.symmetric_difference_update(other)
+        return newset
+    __xor__ = symmetric_difference
+
+    def symmetric_difference_update(self, other):
+        self.__ixor__(other)
+    def __ixor__(self, other):
+        if self._pending_removals:
+            self._commit_removals()
+        if self is other:
+            self.data.clear()
+        else:
+            self.data.symmetric_difference_update(ref(item, self._remove) for item in other)
+        return self
+
+    def union(self, other):
+        return self.__class__(e for s in (self, other) for e in s)
+    __or__ = union
+
+    def isdisjoint(self, other):
+        return len(self.intersection(other)) == 0
