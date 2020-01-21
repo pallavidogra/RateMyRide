@@ -21,3 +21,16 @@ class Post(models.Model):
         return reverse('post-detail', kwargs={'pk': self.pk})
 
 
+
+class Rate(models.Model):
+    post = models.OneToOneField(Post, on_delete=models.CASCADE, related_name='rate')
+    pub_date = models.DateTimeField()
+    comment = models.CharField(max_length=200)
+    rating = models.IntegerField()
+
+    def __str__(self):
+        return self.comment
+
+    class Meta:
+        db_table = 'post_rating'
+        

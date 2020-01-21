@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Post
 from django.views.generic import (
@@ -85,3 +85,39 @@ def PostUpdateView(request):
         
 def about(request):
     return render(request,'main/about.html', {'title': 'About'})
+
+
+def add_rating(request):
+    rating  = request.POST.get("rating")
+    updated_rating = None
+    post_id  = request.POST.get("post_id")
+    post_obj = Post.objects.get(id=post_id)
+    try:
+        review_obj = post_obj.rate
+        review_obj.rating = rating
+        review_obj.save()
+        updated_rating = post_obj.review.rating
+    except:
+        review_obj = Review.objects.create(
+            post=post_obj,
+            rating=rating,
+            pub_date=timezone.now()
+        )
+        updated_rating = review_obj.rating
+    if not updated_rating:
+        return JsonResponse({'error': True})
+    return JsonResponse({'error': False, 'rating':rating})
+
+
+def get_rating(request):
+    post_id  = request.POST.get("post_id")
+    try:
+        post_obj = Post.objects.get(id=post_id)
+    except:
+        post_obj = None
+    if post_obj:
+        review_obj = post_obj.rate
+        rating = review_obj.rating 
+        return JsonResponse({'error': False, 'rating':rating})
+    else:
+        return JsonResponse({'error': True})
