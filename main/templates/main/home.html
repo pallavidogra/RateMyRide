@@ -3,21 +3,19 @@
 {% block blkContent %}
 
   <!-- Grid row -->
-  <div class="" id="gallery">
-    <div class="row">
-      {% for post in keyPosts %}
-        <a class="pop col-lg-4 col-md-4" href="#" >
-           {% if post.imgRide %}               
-            <div class="mb-3 pics animation all 2">
-              <img class="img-fluid custom-id" id="{{ post.id }}" src="{{ post.imgRide.url }}" alt="Card image cap">
-            </div>
-          </a>
-            <p class="post-title" id="post-title-{{ post.id }}" hidden>{{post.title}}</p>
-            <p class="post-title" id="post-description-{{ post.id }}" hidden>{{post.description}}</p>
-            <p class="post-title" id="post-date-posted-{{ post.id }}" hidden>{{post.date_posted}}</p>
-          {% endif %} 
-      {% endfor %}
-    </div>
+  <div class="gallery" id="gallery">
+    {% for post in keyPosts %}
+      <a class="pop" href="#" >
+         {% if post.imgRide %}               
+          <div class="mb-3 pics animation all 2">
+            <img class="img-fluid custom-id" id="{{ post.id }}" src="{{ post.imgRide.url }}" alt="Card image cap">
+          </div>
+        </a>
+          <p class="post-title" id="post-title-{{ post.id }}" hidden>{{post.title}}</p>
+          <p class="post-title" id="post-description-{{ post.id }}" hidden>{{post.description}}</p>
+          <p class="post-title" id="post-date-posted-{{ post.id }}" hidden>{{post.date_posted}}</p>
+        {% endif %} 
+    {% endfor %}
   </div>
 
   <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="
@@ -43,6 +41,29 @@
               <p class="post-description-p"></p>
               <p class="post-date-posted-p"></p>
               <p class="post-author-p"></p>
+              <!-- Rating Stars Box -->
+              <section class='rating-widget'>
+                <div class='rating-stars text-center'>
+                  <ul id='stars'>
+                    <li class='star' title='Poor' data-value='1'>
+                      <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star' title='Fair' data-value='2'>
+                      <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star' title='Average' data-value='3'>
+                      <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star' title='Good' data-value='4'>
+                      <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star' title='Excellent' data-value='5'>
+                      <i class='fa fa-star fa-fw'></i>
+                    </li>
+                  </ul>
+                </div>  
+              </section>
+              <!-- Rating Stars Box End-->
               <a href="#">
                 <p class="next">&gt;</p>
               </a>

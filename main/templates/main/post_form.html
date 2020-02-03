@@ -5,6 +5,7 @@
 {% block blkContent %}
     <div class="content-section col-lg-8 col-lg-offset-4">
         <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">
                     Post Your Ride

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Post
+from .models import Post, Review
 from django.views.generic import (
         ListView,
         DetailView,
@@ -12,6 +12,8 @@ from .forms import (
         postUpdateForm, 
         PostCreateForm
     )
+from django.utils import timezone
+
 
 def home(request):
     all_posts = Post.objects.all().order_by('-id')
@@ -19,6 +21,7 @@ def home(request):
     context = {
         'keyPosts': all_posts
     }
+    
 
     return render(request,'main/home.html', context)
 
@@ -46,6 +49,7 @@ class PostDetailView(DetailView):
     model = Post
 
     # defaults to: <app>/<model>_<viewtype>.html
+
 
 def PostCreateView(request):
     if request.method == 'POST':
@@ -83,9 +87,6 @@ def PostUpdateView(request):
             #return super().form_valid(form)
         return render(request, 'main/form_update.html')
         
-def about(request):
-    return render(request,'main/about.html', {'title': 'About'})
-
 
 def add_rating(request):
     rating  = request.POST.get("rating")
@@ -93,7 +94,7 @@ def add_rating(request):
     post_id  = request.POST.get("post_id")
     post_obj = Post.objects.get(id=post_id)
     try:
-        review_obj = post_obj.rate
+        review_obj = post_obj.review
         review_obj.rating = rating
         review_obj.save()
         updated_rating = post_obj.review.rating
@@ -116,8 +117,13 @@ def get_rating(request):
     except:
         post_obj = None
     if post_obj:
-        review_obj = post_obj.rate
+        review_obj = post_obj.review
         rating = review_obj.rating 
         return JsonResponse({'error': False, 'rating':rating})
     else:
         return JsonResponse({'error': True})
+
+
+
+def about(request):
+    return render(request,'main/about.html', {'title': 'About'})
