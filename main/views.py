@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Post, Review
+from .models import Post, Rating
 from django.views.generic import (
         ListView,
         DetailView,
@@ -99,7 +99,7 @@ def add_rating(request):
         review_obj.save()
         updated_rating = post_obj.review.rating
     except:
-        review_obj = Review.objects.create(
+        review_obj = Rating.objects.create(
             post=post_obj,
             rating=rating,
             pub_date=timezone.now()

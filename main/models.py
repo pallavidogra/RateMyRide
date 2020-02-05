@@ -11,7 +11,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     imgRide = models.ImageField(upload_to='rate-my-ride', blank=True)
     imgRide.verbose_name = "Your Ride"
-    description = models.TextField()
+    description = models.TextField(blank=True,null=True)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -21,11 +21,20 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
 
+    class Meta:
+        db_table='post'
+
     
-class Review(models.Model):
+class Rating(models.Model):
     post = models.OneToOneField(Post, on_delete=models.CASCADE, related_name='review')
-    pub_date = models.DateTimeField()
-    comment = models.CharField(max_length=200)
-    rating = models.IntegerField()
+    pub_date = models.DateTimeField(default=timezone.now)
+    comment = models.CharField(max_length=200,blank=True,null=True)
+    rating = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.post)
+
+    class Meta:
+        db_table ='post_rating'
 
 
