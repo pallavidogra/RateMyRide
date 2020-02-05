@@ -3,10 +3,9 @@
 {% load crispy_forms_tags %}
 
 {% block blkContent %}
-    <div class="content-section">
+    <div class="content-section col-lg-8">
         <form method="POST">
             {% csrf_token %}
-
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">
                     Join Today
@@ -19,7 +18,6 @@
                     Sign Up
                 </button>
             </div>
-
         </form>
 
         <div class="border-top pt-3">
@@ -27,8 +25,6 @@
                 Already Have An Account? <a class"ml-2" href="{% url 'login' %}">Login Now</a>
             </small>
         </div>
-
-
     </div>
 {% endblock blkContent %}
     
