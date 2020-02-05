@@ -9,9 +9,6 @@
         <div class="navbar-nav mr-auto">
           <a class="nav-item nav-link" href="{% url 'main_view' %}">Home</a>
           <a class="nav-item nav-link" href="{% url 'main_about' %}">About</a>
-          {% if user.username == "admin" %}
-            <a class="nav-item nav-link" href="/admin/">Admin</a>
-          {% endif %}
         </div>
         <!-- Navbar Right Side -->
         <div class="navbar-nav">
