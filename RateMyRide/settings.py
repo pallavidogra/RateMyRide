@@ -93,7 +93,7 @@ DATABASES = {
         'USER': 'rate_user',
         'PASSWORD': 'root',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
