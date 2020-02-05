@@ -86,6 +86,20 @@ $( document ).ready(function() {
       });
       $('#imagemodal').modal('show');
       openProfile = $(this);
+      var cards = openProfile.parents('#gallery').find(".pop");
+      var currentCardIndex = cards.index(openProfile);
+      if(cards.length == currentCardIndex+1){
+        $('.prev').show(); 
+        $('.next').hide(); 
+      }
+      else if(currentCardIndex == 0){
+        $('.prev').hide(); 
+        $('.next').show();        
+      } 
+      else if(cards.length > (currentCardIndex + 1)) {
+        $('.prev').show(); 
+        $('.next').show();
+      }
     }); 
 
     $(".next").click(function(event){
@@ -96,9 +110,7 @@ $( document ).ready(function() {
         setTimeout(function() {
           $("#imagemodal").modal("show");
         },500);
-      } else {
-        alert("You are on the last card!");
-      }
+      } 
     });
     
     $(".prev").click(function(event){
@@ -109,8 +121,6 @@ $( document ).ready(function() {
         setTimeout(function() {
           $("#imagemodal").modal("show");
         },500);
-      } else {
-        alert("You are on the first card!");
-      }
+      } 
   });
 });
