@@ -237,3 +237,8 @@ border-radius: 4px;
 }
 
 /* Rating stars box CSS End */
+
+.post-comment-button{
+  margin-top:5px;
+  border-radius:3px;
+}
