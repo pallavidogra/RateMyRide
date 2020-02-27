@@ -165,14 +165,16 @@ a.article-title:hover {
 }
 
 .next{
-  margin-top:55px;
+  margin-top:38px;
   float:right;
   font-size:30px;
+  font-weight: bold;
 }
 
 .prev{
-  margin-top:352px;
+  margin-top:244px;
   font-size:30px;
+  font-weight: bold;
 }
 
 /* Rating stars box CSS start */
