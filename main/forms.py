@@ -9,7 +9,7 @@ from django.views.generic import (
         CreateView,
         UpdateView
     )
-from .models import Post
+from .models import Post,Rating
 
         
 class postUpdateForm(forms.ModelForm):
@@ -24,3 +24,9 @@ class PostCreateForm(forms.ModelForm):
         model = Post
         fields = '__all__'
         exclude = ['author', 'date_posted']
+
+
+class PostComment(forms.ModelForm):
+    class Meta:
+        model = Rating
+        fields = '__all__'

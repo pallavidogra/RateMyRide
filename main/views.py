@@ -6,22 +6,33 @@ from django.views.generic import (
         ListView,
         DetailView,
         CreateView,
-        UpdateView
+        UpdateView,
     )
 from .forms import (
         postUpdateForm, 
-        PostCreateForm
+        PostCreateForm,
+        PostComment
     )
+
 from django.utils import timezone
 
 
 def home(request):
     all_posts = Post.objects.all().order_by('-id')
+    rating = Rating.objects.filter()
+    comment = request.POST.get('post_comment')
+    if request.method == 'POST':
+        form = PostComment(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('main_view')
+    else:
+        form = PostComment()
 
     context = {
-        'keyPosts': all_posts
+        'keyPosts': all_posts,
+        'form':form
     }
-    
 
     return render(request,'main/home.html', context)
 
