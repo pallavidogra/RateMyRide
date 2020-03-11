@@ -13,7 +13,6 @@ from .forms import (
         PostCreateForm,
         PostComment
     )
-
 from django.utils import timezone
 
 
@@ -120,6 +119,15 @@ def add_rating(request):
         return JsonResponse({'error': True})
     return JsonResponse({'error': False, 'rating':rating})
 
+def add_comment(request):
+    post_id  = request.POST.get("post_id")
+    post_obj = Post.objects.get(id=post_id)
+    post_comment = request.POST.get("comment")
+    if post_comment:    
+        review_obj = post_obj.review
+        review_obj.comment = post_comment
+        review_obj.save()
+    return JsonResponse({'error': False})
 
 def get_rating(request):
     post_id  = request.POST.get("post_id")
@@ -129,8 +137,9 @@ def get_rating(request):
         post_obj = None
     if post_obj:
         review_obj = post_obj.review
-        rating = review_obj.rating 
-        return JsonResponse({'error': False, 'rating':rating})
+        rating = review_obj.rating
+        comment = review_obj.comment 
+        return JsonResponse({'error': False, 'rating':rating, 'comment':comment})
     else:
         return JsonResponse({'error': True})
 

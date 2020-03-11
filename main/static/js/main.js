@@ -1,7 +1,9 @@
+
 //rating functionality start
 
 var post_id = ""; //post is define to update rating in database for above rating func
 $(document).ready(function(){
+  $('#id_comment').addClass('form-control');
   /* 1. Visualizing things on Hover - See next part for action on click */
   // refernce https://codepen.io/depy/pen/vEWWdw
   $('#stars li').on('mouseover', function(){
@@ -32,7 +34,7 @@ $(document).ready(function(){
         type: 'POST',
         data: {
           'rating':  onStar,
-          'post_id': post_id
+          'post_id': post_id,
         },
         success: function (response) {
           // var stars = $(this).parent().children('li.star');
@@ -47,6 +49,25 @@ $(document).ready(function(){
       });
     // var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
   }); 
+
+  $('.post-comment-button').on('click', function(e){
+  var comment = $('#id_comment').val()
+  if (comment.length){
+    $.ajax({
+        url: 'add_comment/',  //update comment in database
+        type: 'POST',
+        data: {
+          'post_id': post_id,
+          'comment':comment
+        }
+      });
+    }
+  else{
+     alert("Please Enter Comment");
+     e.preventDefault();
+  }
+  });
+
 });
 
 var openProfile = null;
@@ -74,6 +95,7 @@ $( document ).ready(function() {
             'post_id': post_id
           },
           success: function (response) {
+            var comment = $('.post-comment-p').text(response.comment)
             var stars = $("#stars li");
             for (i = 0; i < stars.length; i++) {
               $(stars[i]).removeClass('selected');

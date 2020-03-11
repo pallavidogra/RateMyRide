@@ -14,5 +14,6 @@ urlpatterns = [
     path('about/', views.about, name='main_about'),
     path('my_post/', views.my_post, name='my-post'),
     path('add_rating/', views.add_rating, name='add-rating'),
+    path('add_comment/', views.add_comment, name='add-comment'),
     path('get_rating/', views.get_rating, name='get-rating'),
  ]
