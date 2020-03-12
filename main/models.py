@@ -6,6 +6,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.urls import reverse
 
+
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=100)
@@ -37,4 +38,20 @@ class Rating(models.Model):
     class Meta:
         db_table ='post_rating'
 
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["created_on"]
+        db_table = 'post_comments'
+
+    def __str__(self):
+        return "Comment {} by {}".format(self.body, self.name)
 
