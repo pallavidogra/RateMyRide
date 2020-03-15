@@ -30,3 +30,7 @@ class PostComment(forms.ModelForm):
     class Meta:
         model = Rating
         fields = '__all__'
+
+        widgets= {
+            'comment': forms.Textarea(attrs={'class': 'form-control comment-size'}),
+        }        

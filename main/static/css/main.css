@@ -165,16 +165,18 @@ a.article-title:hover {
 }
 
 .next{
-  margin-top:38px;
+  margin-top:-88px;
   float:right;
   font-size:30px;
   font-weight: bold;
+  margin-right: -60px;
 }
 
 .prev{
-  margin-top:244px;
+  margin-top:250px;
   font-size:30px;
   font-weight: bold;
+  margin-left: -60px;
 }
 
 /* Rating stars box CSS start */
@@ -243,4 +245,11 @@ border-radius: 4px;
 .post-comment-button{
   margin-top:5px;
   border-radius:3px;
+}
+.comments{
+  font-weight: bold;
+  font-size: 17px;  
+}
+.comment-size{
+  max-height: 50px;
 }

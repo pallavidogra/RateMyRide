@@ -1,80 +1,81 @@
 {% extends "main/base.html" %}
 {% block blkContent %}
-  <!-- Grid row -->
-  <div class="gallery" id="gallery">
-    {% for post in keyPosts %}
-      <a class="pop" href="#" >
-         {% if post.imgRide %}               
-          <div class="mb-3 pics animation all 2">
-            <img class="img-fluid custom-id" id="{{ post.id }}" src="{{ post.imgRide.url }}" alt="Card image cap">
-          </div>
-        </a>
-          <p class="post-title" id="post-title-{{ post.id }}" hidden>{{post.title}}</p>
-          <p class="post-title" id="post-description-{{ post.id }}" hidden>{{post.description}}</p>
-          <p class="post-title" id="post-date-posted-{{ post.id }}" hidden>{{post.date_posted}}</p>
-        {% endif %} 
-    {% endfor %}
-  </div>
+<!-- Grid row -->
+<div class="gallery" id="gallery">
+  {% for post in keyPosts %}
+    {% if post.imgRide %}   
+      <a class="pop" href="#" >            
+        <div class="mb-3 pics animation all 2">
+          <img class="img-fluid custom-id" id="{{ post.id }}" src="{{ post.imgRide.url }}" alt="Card image cap">
+        </div>
+      </a>
+      <p class="post-title" id="post-title-{{ post.id }}" hidden>{{post.title}}</p>
+      <p class="post-title" id="post-description-{{ post.id }}" hidden>{{post.description}}</p>
+      <p class="post-title" id="post-date-posted-{{ post.id }}" hidden>{{post.date_posted}}</p>
+    {% endif %} 
+  {% endfor %}
+</div>
 
-  <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="
-    myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg width-100">
-      <div class="modal-content width-100">              
-        <div class="modal-body width-100 modal-padding">
-          <button type="button" class="close modal-close" data-dismiss="modal">
-            <span aria-hidden="true">&times;</span>
-            <span class="sr-only">Close</span>
-          </button>
-          <div class="col-lg-12 modal-padding">
-            <div class="col-lg-1 modal-right-div">
-              <a href="#">
-                <p class="prev">&lt;</p>
-              </a>
-            </div>            
-            <div class="col-lg-7 modal-right-div modal-padding">
-              <img src="" class="imagepreview width-100">
-            </div>
-            <div class="col-lg-4 modal-right-div">
-              <p class="post-title-p"></p>
-              <p class="post-description-p"></p>
-              <p class="post-date-posted-p"></p>
-              <p class="post-author-p"></p>
-              
-              <!-- Rating Stars Box -->
-              <section class='rating-widget'>
-                <div class='rating-stars text-center'>
-                  <ul id='stars'>
-                    <li class='star' title='Poor' data-value='1'>
-                      <i class='fa fa-star fa-fw'></i>
-                    </li>
-                    <li class='star' title='Fair' data-value='2'>
-                      <i class='fa fa-star fa-fw'></i>
-                    </li>
-                    <li class='star' title='Average' data-value='3'>
-                      <i class='fa fa-star fa-fw'></i>
-                    </li>
-                    <li class='star' title='Good' data-value='4'>
-                      <i class='fa fa-star fa-fw'></i>
-                    </li>
-                    <li class='star' title='Excellent' data-value='5'>
-                      <i class='fa fa-star fa-fw'></i>
-                    </li>
-                  </ul>
-                </div>  
-              </section>
-              <p class="post-comment-p"></p>
-              <form method="POST">
-                {{ form.comment }}
-                <button class="btn-primary post-comment-button" name="comment">Post</button>
-              </form>
-              <!-- Rating Stars Box End-->
-              <a href="#">
-                <p class="next">&gt;</p>
-              </a>
-            </div>
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="
+  myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg width-100">
+    <div class="modal-content width-100">              
+      <div class="modal-body width-100 modal-padding">
+        <button type="button" class="close modal-close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <div class="col-lg-12 modal-padding">
+          <div class="col-lg-1 modal-right-div">
+            <a href="#">
+              <p class="prev">&lt;</p>
+            </a>
+          </div>            
+          <div class="col-lg-7 modal-right-div modal-padding">
+            <img src="" class="imagepreview width-100">
+          </div>
+          <div class="col-lg-4 modal-right-div">
+            <p class="post-title-p"></p>
+            <p class="post-description-p"></p>
+            <p class="post-date-posted-p"></p>
+            <p class="post-author-p"></p>
+            
+            <!-- Rating Stars Box -->
+            <section class='rating-widget'>
+              <div class='rating-stars text-center'>
+                <ul id='stars'>
+                  <li class='star' title='Poor' data-value='1'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Fair' data-value='2'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Average' data-value='3'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Good' data-value='4'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Excellent' data-value='5'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                </ul>
+              </div>  
+            </section>
+            <br><label class="comments">Comments:-</label>
+            <p class="post-comment-p"></p>
+            <form method="POST">
+              {{ form.comment }}<br>
+              <button class="btn-primary post-comment-button" name="comment">Post</button><br><br>
+            </form>
+            <!-- Rating Stars Box End-->
+            <a href="#">
+              <p class="next">&gt;</p>
+            </a>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
  {% endblock blkContent %}
