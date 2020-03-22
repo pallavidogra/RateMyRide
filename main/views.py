@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from .models import Post, Rating
 from django.views.generic import (
         ListView,
@@ -97,7 +98,7 @@ def PostUpdateView(request):
             #return super().form_valid(form)
         return render(request, 'main/form_update.html')
         
-
+@login_required
 def add_rating(request):
     rating  = request.POST.get("rating")
     updated_rating = None
@@ -119,6 +120,7 @@ def add_rating(request):
         return JsonResponse({'error': True})
     return JsonResponse({'error': False, 'rating':rating})
 
+@login_required
 def add_comment(request):
     post_id  = request.POST.get("post_id")
     post_obj = Post.objects.get(id=post_id)
@@ -128,6 +130,7 @@ def add_comment(request):
         review_obj.comment = post_comment
         review_obj.save()
     return JsonResponse({'error': False})
+
 
 def get_rating(request):
     post_id  = request.POST.get("post_id")
