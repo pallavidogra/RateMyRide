@@ -1,8 +1,8 @@
 body {
-    background: #fafafa;
-    color: #333333;
-    margin-top: 5rem;
-  }
+  background: #fafafa;
+  color: #333333;
+  margin-top: 5rem;
+}
   
 h1, h2, h3, h4, h5, h6 {
   color: #444444;
@@ -151,7 +151,6 @@ a.article-title:hover {
 
 .my-posts-a{
   text-decoration: none !important;
-
 }
 
 .modal-right-div{
@@ -182,24 +181,23 @@ a.article-title:hover {
 /* Rating stars box CSS start */
 
 pre {
-display: block;
-padding: 9.5px;
-margin: 0 0 10px;
-font-size: 13px;
-line-height: 1.42857143;
-color: #333;
-word-break: break-all;
-word-wrap: break-word;
-background-color: #F5F5F5;
-border: 1px solid #CCC;
-border-radius: 4px;
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #F5F5F5;
+  border: 1px solid #CCC;
+  border-radius: 4px;
 }
 .new-react-version {
   padding: 20px 20px;
   border: 1px solid #eee;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
-  
   text-align: center;
   font-size: 14px;
   line-height: 1.7;

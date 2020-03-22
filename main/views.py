@@ -147,6 +147,5 @@ def get_rating(request):
         return JsonResponse({'error': True})
 
 
-
 def about(request):
     return render(request,'main/about.html', {'title': 'About'})
