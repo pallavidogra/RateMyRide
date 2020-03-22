@@ -32,5 +32,5 @@ class PostComment(forms.ModelForm):
         fields = '__all__'
 
         widgets= {
-            'comment': forms.Textarea(attrs={'class': 'form-control comment-size'}),
+            'comment': forms.TextInput(attrs={'class': 'form-control'}),
         }        
