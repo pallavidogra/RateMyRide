@@ -31,7 +31,6 @@ urlpatterns = [
     path('', include('main.urls'))    
 ]
 
-
 admin.site.site_header = 'Rate My Ride Admin'
 
 if settings.DEBUG:

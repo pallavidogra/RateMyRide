@@ -9,7 +9,7 @@ from django.views.generic import (
         CreateView,
         UpdateView
     )
-from .models import Post,Rating
+from .models import Post,Rating,Comment
 
         
 class postUpdateForm(forms.ModelForm):
@@ -34,3 +34,8 @@ class PostComment(forms.ModelForm):
         widgets= {
             'comment': forms.TextInput(attrs={'class': 'form-control'}),
         }        
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name', 'email', 'body')
