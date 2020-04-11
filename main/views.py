@@ -12,7 +12,8 @@ from django.views.generic import (
 from .forms import (
         postUpdateForm, 
         PostCreateForm,
-        PostComment
+        PostComment,
+        CommentForm
     )
 from django.utils import timezone
 
@@ -46,21 +47,10 @@ def my_post(request):
 
     return render(request,'main/home.html', context)
 
-# class PostListView(ListView):
-#     model = Post
-
-#     # defaults to: <app>/<model>_<viewtype>.html
-#     template_name = 'main/home.html'
-
-#     context_object_name = 'keyPosts'
-#     ordering = ['-date_posted']
-
-
 class PostDetailView(DetailView):
     model = Post
 
     # defaults to: <app>/<model>_<viewtype>.html
-
 
 def PostCreateView(request):
     if request.method == 'POST':
@@ -132,9 +122,9 @@ def add_comment(request):
     return JsonResponse({'error': False})
 
 def post_detail(request):
-    template_name = "post_detail.html"
+    template_name = "main/post_detail.html"
     post = get_object_or_404(Post)
-    comments = post.comments.filter(active=True).order_by("-created_on")
+    # comments = post.comments.filter(active=True).order_by("-created_on")
     new_comment = None
     # Comment posted
     if request.method == "POST":
@@ -154,7 +144,7 @@ def post_detail(request):
         template_name,
         {
             "post": post,
-            "comments": comments,
+            # "comments": comments,
             "new_comment": new_comment,
             "comment_form": comment_form,
         },
@@ -173,7 +163,6 @@ def get_rating(request):
         return JsonResponse({'error': False, 'rating':rating, 'comment':comment})
     else:
         return JsonResponse({'error': True})
-
 
 def about(request):
     return render(request,'main/about.html', {'title': 'About'})
