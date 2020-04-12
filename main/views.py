@@ -38,17 +38,17 @@ def home(request):
     return render(request,'main/home.html', context)
 
 def my_post(request):
-    current_user = str(request.user)
-    filtered_posts = Post.objects.filter(author__username__iexact=current_user)
-
+    filtered_posts = Post.objects.filter(author__username__iexact=str(request.user))
+    print('filtered_posts',filtered_posts)
     context = {
         'keyPosts': filtered_posts
     }
-
     return render(request,'main/home.html', context)
 
-class PostDetailView(DetailView):
-    model = Post
+def PostDetailView(request, pk):
+    post_obj = Post.objects.filter(id=pk)
+    print('post_obj',post_obj)
+    return render(request, 'main/modal.html', {'post_obj':post_obj})
 
     # defaults to: <app>/<model>_<viewtype>.html
 
@@ -166,3 +166,7 @@ def get_rating(request):
 
 def about(request):
     return render(request,'main/about.html', {'title': 'About'})
+
+
+def modal(request):
+    return render(request, 'main/modal.html')

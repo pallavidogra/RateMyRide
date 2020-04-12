@@ -1,20 +1,7 @@
 from django.contrib import admin
 from .models import Post, Rating, Comment
-from django_summernote.admin import SummernoteModelAdmin
-
 # Register your models here.
 admin.site.register(Rating)
-
-
-
-class PostAdmin(SummernoteModelAdmin):
-    list_display = ('title', 'description', 'date_posted')
-    list_filter = ('author', 'date_posted')
-    search_fields = ['title', 'description']
-    prepopulated_fields = {'title': ('description',)}
-
-    summernote_fields = ('description',)
-
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -27,5 +14,5 @@ class CommentAdmin(admin.ModelAdmin):
         queryset.update(active=True)
 
 
-admin.site.register(Post, PostAdmin)
+admin.site.register(Post)
 admin.site.register(Comment)
