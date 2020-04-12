@@ -157,7 +157,11 @@ a.article-title:hover {
   float: left;
 }
 .modal-padding{
-  padding: 0px;
+  padding:0px;
+}
+
+.pop-up-modal{
+  padding: 2px !important;
 }
 .modal-close{
   padding: 16px !important;
