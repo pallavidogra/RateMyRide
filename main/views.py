@@ -47,10 +47,16 @@ def my_post(request):
 
 def PostDetailView(request, pk):
     post_obj = Post.objects.filter(id=pk)
-    print('post_obj',post_obj)
-    return render(request, 'main/modal.html', {'post_obj':post_obj})
+    context = {
+        'post_obj':post_obj
+    }
+    return render(request, 'main/modal.html', context)
 
-    # defaults to: <app>/<model>_<viewtype>.html
+def PreviousPost(request):
+    pass
+
+def NextPost(request):
+    pass
 
 def PostCreateView(request):
     if request.method == 'POST':
@@ -76,13 +82,10 @@ def PostUpdateView(request):
             return super().form_valid(form)
     else:
         model = Post
-        
         # url defaults to: <app>/<model>_<viewtype>.html
-
         fields = ['title', 'imgRide', 'description']
         #fields = ['title', 'description']
         #return render(request, 'users/profile.html', context)
-        
         def form_valid(self, form):
             form.instance.author = self.request.user
             #return super().form_valid(form)

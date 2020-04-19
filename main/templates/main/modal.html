@@ -1,0 +1,48 @@
+{% extends "main/base.html" %}
+
+{% block blkContent %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Example of Auto Loading Bootstrap Modal on Page Load</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#myModal").modal('show');
+            });
+
+            $('#prev').click(function(e) {
+                e.preventDefault();
+                var x = $(this).prev().attr('id');
+                alert(x);
+
+            });
+        </script>
+    </head>
+    <body>
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <a href="#" id="prev">Prev</a>
+                        {% for post in  post_obj%}
+                            <img class="post-modal-image" src="{{post.imgRide.url}}">
+                            {{ post.title }}<br>
+                            {{ post.description }}<br>
+                            {{ post.date_posted }}<br>
+                            {{ post.author }}<br>
+                        {% endfor %}
+                        <p id="next">Next</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>                            
+{% endblock %}

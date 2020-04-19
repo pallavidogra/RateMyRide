@@ -17,5 +17,5 @@ urlpatterns = [
     path('add_comment/', views.add_comment, name='add-comment'),
     path('get_rating/', views.get_rating, name='get-rating'),
     path('post_details/', views.post_detail, name='post-details'),
-    path('modal/', views.modal, name='modal'),
+    path('post-modal/', views.modal, name='post_modal'),
  ]
