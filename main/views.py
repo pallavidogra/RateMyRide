@@ -38,17 +38,17 @@ def home(request):
     return render(request,'main/home.html', context)
 
 def my_post(request):
-    filtered_posts = Post.objects.filter(author__username__iexact=str(request.user))
-    print('filtered_posts',filtered_posts)
+    current_user = str(request.user)
+    filtered_posts = Post.objects.filter(author__username__iexact=current_user)
+
     context = {
         'keyPosts': filtered_posts
     }
+
     return render(request,'main/home.html', context)
 
-def PostDetailView(request, pk):
-    post_obj = Post.objects.filter(id=pk)
-    print('post_obj',post_obj)
-    return render(request, 'main/modal.html', {'post_obj':post_obj})
+class PostDetailView(DetailView):
+    model = Post
 
     # defaults to: <app>/<model>_<viewtype>.html
 
@@ -94,18 +94,13 @@ def add_rating(request):
     updated_rating = None
     post_id  = request.POST.get("post_id")
     post_obj = Post.objects.get(id=post_id)
-    try:
-        review_obj = post_obj.review
-        review_obj.rating = rating
-        review_obj.save()
-        updated_rating = post_obj.review.rating
-    except:
-        review_obj = Rating.objects.create(
-            post=post_obj,
-            rating=rating,
-            pub_date=timezone.now()
-        )
-        updated_rating = review_obj.rating
+
+    review_obj = Rating.objects.create(
+        post=post_obj,
+        rating=rating,
+        pub_date=timezone.now()
+    )
+    updated_rating = review_obj.rating
     if not updated_rating:
         return JsonResponse({'error': True})
     return JsonResponse({'error': False, 'rating':rating})
@@ -166,7 +161,3 @@ def get_rating(request):
 
 def about(request):
     return render(request,'main/about.html', {'title': 'About'})
-
-
-def modal(request):
-    return render(request, 'main/modal.html')

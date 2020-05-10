@@ -4,7 +4,7 @@
 <div class="gallery" id="gallery">
   {% for post in keyPosts %}
     {% if post.imgRide %}   
-      <a class="pop" href="{% url 'post-detail' post.id %}" >            
+      <a class="pop" href="#" >            
         <div class="mb-3 pics animation all 2">
           <img class="img-fluid custom-id" id="{{ post.id }}" src="{{ post.imgRide.url }}" alt="Card image cap">
         </div>
@@ -31,7 +31,7 @@
               <p class="prev">&lt;</p>
             </a>
           </div>            
-          <div class="col-lg-7 modal-right-div pop-up-modal">
+          <div class="col-lg-7 modal-right-div modal-padding">
             <img src="" class="imagepreview width-100">
           </div>
           <div class="col-lg-4 modal-right-div">
