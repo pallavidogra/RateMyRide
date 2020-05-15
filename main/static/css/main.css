@@ -169,17 +169,19 @@ a.article-title:hover {
   padding: 16px !important;
 }
 .next{
-  margin-top:-88px;
+  margin-top:-180px;
   float:right;
   font-size:30px;
   font-weight: bold;
-  margin-right: -60px;
+  margin-right: -45px;
+  color: white;
 }
 .prev{
-  margin-top:250px;
+  margin-top:135px;
   font-size:30px;
   font-weight: bold;
-  margin-left: -60px;
+  margin-left: -45px;
+  color: white;
 }
 
 /* Rating stars box CSS start */
