@@ -1,13 +1,16 @@
 {% extends "main/base.html" %}
 {% block blkContent %}
+{% load thumbnail %}
 <!-- Grid row -->
 <div class="gallery" id="gallery">
   {% for post in keyPosts %}
     {% if post.imgRide %}   
-      <a class="pop" href="#" >            
-        <div class="mb-3 pics animation all 2">
-          <img class="img-fluid custom-id" id="{{ post.id }}" src="{{ post.imgRide.url }}" alt="Card image cap">
-        </div>
+      <a class="pop" href="#" >  
+        {% thumbnail post.imgRide "275x183" crop="center" as im %}          
+          <div class="mb-3 pics animation all 2">
+            <img class="img-fluid custom-id" id="{{ post.id }}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="Card image cap">
+          </div>
+        {% endthumbnail %}
       </a>
       <p class="post-title" id="post-title-{{ post.id }}" hidden>{{post.title}}</p>
       <p class="post-title" id="post-description-{{ post.id }}" hidden>{{post.description}}</p>
