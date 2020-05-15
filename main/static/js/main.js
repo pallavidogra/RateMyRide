@@ -125,7 +125,7 @@ $( document ).ready(function() {
     }); 
 
     $(".next").click(function(event){
-      var cards = openProfile.parents('.gallery').find(".pop");
+      var cards = openProfile.parents('#gallery').find(".pop");
       var currentCardIndex = cards.index(openProfile);
       if(cards.length > (currentCardIndex + 1)) {
         cards.get(currentCardIndex + 1).click();
@@ -136,7 +136,7 @@ $( document ).ready(function() {
     });
     
     $(".prev").click(function(event){
-      var cards = openProfile.parents('.gallery').find(".pop");
+      var cards = openProfile.parents('#gallery').find(".pop");
       var currentCardIndex = cards.index(openProfile);
       if(currentCardIndex > 0) {
         cards.get(currentCardIndex - 1).click();
