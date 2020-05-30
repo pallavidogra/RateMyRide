@@ -88,7 +88,7 @@ def PostUpdateView(request):
             #return super().form_valid(form)
         return render(request, 'main/form_update.html')
         
-@login_required
+
 @login_required
 def add_rating(request):
     rating  = request.POST.get("rating")
