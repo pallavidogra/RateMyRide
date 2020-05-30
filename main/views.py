@@ -89,18 +89,24 @@ def PostUpdateView(request):
         return render(request, 'main/form_update.html')
         
 @login_required
+@login_required
 def add_rating(request):
     rating  = request.POST.get("rating")
     updated_rating = None
     post_id  = request.POST.get("post_id")
     post_obj = Post.objects.get(id=post_id)
-
-    review_obj = Rating.objects.create(
-        post=post_obj,
-        rating=rating,
-        pub_date=timezone.now()
-    )
-    updated_rating = review_obj.rating
+    try:
+        review_obj = post_obj.review
+        review_obj.rating = rating
+        review_obj.save()
+        updated_rating = post_obj.review.rating
+    except:
+        review_obj = Rating.objects.create(
+            post=post_obj,
+            rating=rating,
+            pub_date=timezone.now()
+        )
+        updated_rating = review_obj.rating
     if not updated_rating:
         return JsonResponse({'error': True})
     return JsonResponse({'error': False, 'rating':rating})
