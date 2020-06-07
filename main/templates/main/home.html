@@ -75,6 +75,9 @@
                 {{ form.comment }}<br>
                 <button class="btn-primary post-comment-button" name="comment">Post</button><br><br>
               </form>
+            {% else %}
+              <br><label class="comments">Comments:-</label>
+              <p class="post-comment-p"></p>
             {% endif %}
             <!-- Rating Stars Box End-->
             <a href="#">
