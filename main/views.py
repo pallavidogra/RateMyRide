@@ -153,11 +153,12 @@ def post_detail(request):
 
 def get_rating(request):
     post_id  = request.POST.get("post_id")
+
     try:
-        post_obj = Post.objects.get(id=post_id)
+        post_obj = Post.objects.get(id=post_id)      
     except:
         post_obj = None
-    if post_obj:
+    if hasattr(post_obj,"review"):
         review_obj = post_obj.review
         rating = review_obj.rating
         comment = review_obj.comment 
