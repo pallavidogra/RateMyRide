@@ -176,6 +176,16 @@ a.article-title:hover {
   margin-right: -45px;
   color: white;
 }
+
+.next-unauthenticated{
+  margin-top:-58px;
+  float:right;
+  font-size:30px;
+  font-weight: bold;
+  margin-right: -45px;
+  color: white;
+}
+
 .prev{
   margin-top:155px;
   font-size:30px;

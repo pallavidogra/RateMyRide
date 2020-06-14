@@ -2,7 +2,17 @@
 {% block blkContent %}
 {% load thumbnail %}
 <!-- Grid row -->
+<style>
+  .next-unauthenticated{
+  margin-top:-58px;
+  float:right;
+  font-size:30px;
+  font-weight: bold;
+  margin-right: -45px;
+  color: white;
+}
 
+</style>
 <div class="" id="gallery">
   <div class="row">
     {% for post in keyPosts %}
@@ -68,20 +78,24 @@
                 </ul>
               </div>  
             </section>
+            <br><label class="comments">Comments:-</label>
             {% if request.user.is_authenticated %}
-              <br><label class="comments">Comments:-</label>
               <p class="post-comment-p"></p>
               <form method="POST">
                 {{ form.comment }}<br>
                 <button class="btn-primary post-comment-button" name="comment">Post</button><br><br>
               </form>
             {% else %}
-              <br><label class="comments">Comments:-</label>
+            
               <p class="post-comment-p"></p>
             {% endif %}
             <!-- Rating Stars Box End-->
             <a href="#">
-              <p class="next">&gt;</p>
+              {% if form.comment %}
+                <p class="next">&gt;</p>
+              {% else %}
+                <p class="next-unauthenticated">&gt;</p>
+              {% endif %}
             </a>
           </div>
         </div>
