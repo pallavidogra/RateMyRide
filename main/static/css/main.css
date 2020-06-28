@@ -159,7 +159,7 @@ a.article-title:hover {
   float: left;
 }
 .modal-padding{
-  padding:0px;
+  padding:0px !important;
 }
 
 .pop-up-modal{
@@ -169,12 +169,12 @@ a.article-title:hover {
   padding: 16px !important;
 }
 .next{
-  margin-top:-180px;
-  float:right;
-  font-size:30px;
+  margin-top: -11px;
+  float: right;
+  font-size: 30px;
   font-weight: bold;
-  margin-right: -45px;
   color: white;
+  margin-right: -105px;
 }
 
 .next-unauthenticated{
@@ -190,7 +190,7 @@ a.article-title:hover {
   margin-top:155px;
   font-size:30px;
   font-weight: bold;
-  margin-left: -45px;
+  margin-left: 27px;
   color: white;
 }
 
