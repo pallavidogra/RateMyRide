@@ -111,15 +111,44 @@ def add_rating(request):
         return JsonResponse({'error': True})
     return JsonResponse({'error': False, 'rating':rating})
 
+
+
+# def add_comment(request):
+#     post_id  = request.POST.get("post_id")
+#     post_obj = Post.objects.get(id=post_id)
+#     post_comment = request.POST.get("comment")
+#     if post_comment:    
+#         review_obj = post_obj.review
+#         review_obj.comment = post_comment
+#         review_obj.save()
+#     return JsonResponse({'error': False})
+
+
 @login_required
 def add_comment(request):
+    print('post_obj before')
     post_id  = request.POST.get("post_id")
+    print('post_id',post_id)
     post_obj = Post.objects.get(id=post_id)
+    print('post_obj',post_obj)
     post_comment = request.POST.get("comment")
-    if post_comment:    
-        review_obj = post_obj.review
+    print('post_comment',post_comment)
+    try:
+        print('in try')
+        review_obj = post_obj.comments
+        print('print_obj 1',review_obj)
         review_obj.comment = post_comment
+        print('print_obj 2',post_comment)
         review_obj.save()
+        print('review_obj',review_obj)
+    except:
+        review_obj = Comment.objects.create(
+            post=post_obj,
+            name=post_comment,
+            created_on=timezone.now()
+        )
+    if not post_comment:   
+        return JsonResponse({'error': True})
     return JsonResponse({'error': False})
 
 def post_detail(request):
