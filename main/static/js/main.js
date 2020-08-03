@@ -70,6 +70,16 @@ $(document).ready(function(){
 
 });
 
+// $( document ).ready(function() {
+//   $('.pop').on('click', function(e) {
+//       var image_id = $(this).find('img').attr('id');
+//       console.log("image_id",image_id);
+//       var text=
+//     }
+//     )
+//   }
+// )
+
 var openProfile = null;
 $( document ).ready(function() {
   $('.pop').on('click', function(e) {
@@ -95,7 +105,12 @@ $( document ).ready(function() {
             'post_id': post_id
           },
           success: function (response) {
-            var comment = $('.post-comment-p').text(response.comment)
+          if(response.error == false){
+            var comment = $('.post-comment-p').text(response.comment) 
+          } 
+          else if(response.error == true){
+            var comment = $('.post-comment-p').text("") 
+          } 
             var stars = $("#stars li");
             for (i = 0; i < stars.length; i++) {
               $(stars[i]).removeClass('selected');
