@@ -70,16 +70,6 @@ $(document).ready(function(){
 
 });
 
-// $( document ).ready(function() {
-//   $('.pop').on('click', function(e) {
-//       var image_id = $(this).find('img').attr('id');
-//       console.log("image_id",image_id);
-//       var text=
-//     }
-//     )
-//   }
-// )
-
 var openProfile = null;
 $( document ).ready(function() {
   $('.pop').on('click', function(e) {
