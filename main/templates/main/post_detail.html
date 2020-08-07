@@ -1,49 +1,47 @@
 {% extends "main/base.html" %}
-
 {% block blkContent %}
-    <article class="media content-section">
-        <div class="media-body">
-            <div class="article-metadata">
-            <a class="mr-2" href="#">{{ oject.author }}</a>
-                <small class="text-muted">{{ object.date_posted|date:"F d Y" }}</small>
-            </div>
-            <h2 class="article-title">{{ object.title }}</h2>
-            {% if post.imgRide.url != "/media/0" %}
-                <img src="{{ post.imgRide.url }}"></img>                
-            {% endif %}
-            <p class="article-content">{{ object.description }}</p>
-        </div>
-    </article>   
+<article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ oject.author }}</a>
+      <small class="text-muted">{{ object.date_posted|date:"F d Y" }}</small>
+    </div>
+    <h2 class="article-title">{{ object.title }}</h2>
+    {% if post.imgRide.url != "/media/0" %}
+      <img src="{{ post.imgRide.url }}"></img>                
+    {% endif %}
+    <p class="article-content">{{ object.description }}</p>
+  </div>
+</article>   
 
 <!-- The Modal -->
 <div class="col-lg-12">
-    <div class="modal" id="myModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">{{ object.title }}</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">{{ object.title }}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
 
-          <!-- Modal body -->
-          <div class="modal-body">
-            <a class="mr-2" href="#">{{ oject.author }}</a>
-            <small class="text-muted">{{ object.date_posted|date:"F d Y" }}</small>
-            {% if post.imgRide.url != "/media/0" %}
-                <img src="{{ post.imgRide.url }}"></img>                
-            {% endif %}
-            <p class="article-content">{{ object.description }}</p>
-          </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <a class="mr-2" href="#">{{ oject.author }}</a>
+          <small class="text-muted">{{ object.date_posted|date:"F d Y" }}</small>
+          {% if post.imgRide.url != "/media/0" %}
+            <img src="{{ post.imgRide.url }}"></img>                
+          {% endif %}
+          <p class="article-content">{{ object.description }}</p>
+        </div>
 
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
 </div>
 
 {% endblock blkContent %}

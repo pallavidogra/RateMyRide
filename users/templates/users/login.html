@@ -3,31 +3,28 @@
 {% load crispy_forms_tags %}
 
 {% block blkContent %}
-    <div class="content-section col-lg-8">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">
-                    Login
-                </legend>
-                {{ form|crispy }}
-            </fieldset>
+  <div class="content-section col-lg-8">
+    <form method="POST">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">
+          Login
+        </legend>
+        {{ form|crispy }}
+      </fieldset>
 
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">
-                    Login
-                </button>
-            </div>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">
+          Login
+        </button>
+      </div>
+    </form>
 
-        </form>
-
-        <div class="border-top pt-3">
-            <small>
-                Need An Account? <a class"ml-2" href="{% url 'register' %}">Register Now</a>
-            </small>
-        </div>
-
-
+    <div class="border-top pt-3">
+      <small>
+        Need An Account? <a class"ml-2" href="{% url 'register' %}">Register Now</a>
+      </small>
     </div>
+  </div>
 {% endblock blkContent %}
     

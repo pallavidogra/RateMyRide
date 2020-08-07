@@ -169,7 +169,7 @@ a.article-title:hover {
   padding: 16px !important;
 }
 .next{
-  margin-top: -110px;
+  margin-top: -150px;
   float: right;
   font-size: 30px;
   font-weight: bold;
@@ -177,17 +177,8 @@ a.article-title:hover {
   margin-right: -105px;
 }
 
-.next-unauthenticated{
-  margin-top:-58px;
-  float:right;
-  font-size:30px;
-  font-weight: bold;
-  margin-right: -45px;
-  color: white;
-}
-
 .prev{
-  margin-top:155px;
+  margin-top:145px;
   font-size:30px;
   font-weight: bold;
   margin-left: 27px;
@@ -259,4 +250,14 @@ a.article-title:hover {
 .comments{
   font-weight: bold;
   font-size: 17px;  
+}
+.image-align{
+  float:left; 
+  margin-left: -66px;
+}
+.top-align{
+  margin-top: 3%;
+}
+.star-rate{
+  padding-top: 6px;
 }
