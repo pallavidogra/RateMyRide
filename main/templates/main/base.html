@@ -2,47 +2,53 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" >
-    {% if title %}
-      <title>Rate My Ride - {{ title }} </title>
-    {% else %}
-      <title>Rate My Ride</title>
-    {% endif %}
-  </head>
-  <body>
-   
-    {% include 'main/header.html' %}
-      
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+  {% if title %}
+    <title>Rate My Ride - {{ title }} </title>
+  {% else %}
+    <title>Rate My Ride</title>
+  {% endif %}
+</head>
+
+<body>
+  {% include 'main/header.html' %}
+  <section>
     <div class="container">
       {% if messages %}
         {% for message in messages %}
           <div class="alert alert-{{ message.tags }}">
             {{ message }}
-          </div>        
+          </div>
         {% endfor %}
       {% endif %}
       {% block blkContent %}
-      {% endblock %}    
-    </div>    
-      
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script> -->
-    <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-    
-  </body>
+      {% endblock %}
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Copyright &copy; 2020 Ratemyride, All Rights Reserved. <a href="https://www.imarkinfotech.com/privacy-policy/">Privacy Policy</a> <span>|</span> <a href="#">Terms & Conditions</a> </p>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+</body>
 </html>

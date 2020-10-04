@@ -1,0 +1,17 @@
+{% extends "main/base.html" %}
+
+{% block blkContent %}
+
+
+<div class="heading text-center">
+  <h1>You have been logged out</h1>
+</div>
+
+<div class="text-center pt-3">
+  <p>
+    <a href="{% url 'login' %}">Log In Again</a>
+  </p>
+</div>
+ 
+{% endblock blkContent %}
+    

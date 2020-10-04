@@ -1,23 +1,19 @@
 {% extends "main/base.html" %}
 {% block blkContent %}
-{% load thumbnail %}
 
 <!-- gallery start -->
-
-<div class="" id="gallery">
+<div  id="gallery">
   <div class="row">
     {% for post in keyPosts %}
       {% if post.imgRide %}
-        <a class="pop col-lg-4 col-md-4 col-sm-4" href="#" >
-         {% thumbnail post.imgRide "275x183" crop="center" as im %}              
-            <div class="mb-3 pics animation all 2">
-              <img class="img-fluid custom-id" id="{{ post.id }}" src="{{ im.url }}"  width="{{ im.width }}" height="{{ im.height }}" alt="Card image cap">
-            </div>
-          {% endthumbnail %}
-        </a>
-        <p class="post-title" id="post-title-{{ post.id }}" hidden>{{post.title}}</p>
-        <p class="post-title" id="post-description-{{ post.id }}" hidden>{{post.description}}</p>
-        <p class="post-title" id="post-date-posted-{{ post.id }}" hidden>{{post.date_posted}}</p>
+        <div class="pop col-lg-4 col-md-6 col-sm-6 col-12" >
+          <div class="pics" data-aos="fade-up">
+            <img class="img-fluid custom-id" id="{{ post.id }}" src="{{ post.imgRide.url }}" alt="{{ post.imgRide.url }}">
+            <p class="post-title" id="post-title-{{ post.id }}" >{{post.title}}</p>
+            <p class="post-title" id="post-description-{{ post.id }}" hidden>{{post.description}}</p>
+            <p class="post-title" id="post-date-posted-{{ post.id }}" hidden>{{post.date_posted}}</p>
+          </div>
+        </div>
       {% endif %} 
     {% endfor %}
   </div>
@@ -27,73 +23,74 @@
 <!-- gallery start -->
 <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="
   myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg width-100">
+  <div class="modal-dialog width-100">
     <div class="modal-content width-100">              
-      <div class="modal-body width-100 modal-padding">
+      <div class="modal-body width-100 ">
         <button type="button" class="close modal-close" data-dismiss="modal">
-          <span aria-hidden="true">&times;</span>
-          <span class="sr-only">Close</span>
+          <span aria-hidden="true"><i class="fa fa-times"></i></span>
         </button>
-        <div class="col-lg-12 modal-padding image-align">
-          <div class="col-lg-1 modal-right-div">
-            <a href="#">
-              <p class="prev">&lt;</p>
-            </a>
-          </div>            
-          <div class="col-lg-7 modal-right-div modal-padding">
-            <img src="" class="imagepreview width-100">
-          </div>
-          <div class="col-lg-4 modal-right-div top-align">
-            <p class="post-title-p"></p>
-            <p class="post-description-p"></p>
-            <p class="post-date-posted-p"></p>
-            <p class="post-author-p"></p>
-            
-            <!-- Rating Stars Box -->
-            <section class='rating-widget star-rate'>
-              <div class='rating-stars text-center'>
-                <ul id='stars'>
-                  <li class='star' title='Poor' data-value='1'>
-                    <i class='fa fa-star fa-fw'></i>
-                  </li>
-                  <li class='star' title='Fair' data-value='2'>
-                    <i class='fa fa-star fa-fw'></i>
-                  </li>
-                  <li class='star' title='Average' data-value='3'>
-                    <i class='fa fa-star fa-fw'></i>
-                  </li>
-                  <li class='star' title='Good' data-value='4'>
-                    <i class='fa fa-star fa-fw'></i>
-                  </li>
-                  <li class='star' title='Excellent' data-value='5'>
-                    <i class='fa fa-star fa-fw'></i>
-                  </li>
-                </ul>
-              </div>  
-            </section>
-            <!-- Rating Stars Box End-->
 
-            <br><label class="comments">Comments:-</label>
-            {% if request.user.is_authenticated %}
-              <p class="post-comment-p"></p>
-              <form method="POST">
-                {{ form.comment }}<br>
-                <button class="btn-primary post-comment-button" name="comment">Post</button><br><br>
-              </form>
-            {% else %}
-            
-              <p class="post-comment-p"></p>
-            {% endif %}
-            
-            <a href="#">
-              <p class="next">&gt;</p>
-            </a>
+        <button type="button"  class="prev"><i class="fa fa-angle-left"></i></button>
+        <button type="button"  class="next"><i class="fa fa-angle-right"></i></button>
+
+          <div class="modal-elem">
+            <div class="modal-elem-left">
+              <img src="" class="imagepreview width-100">
+            </div>
+            <div class="modal-elem-right">
+              <h5 class="post-title-p"></h5>
+              <p class="post-date-posted-p"></p>
+              <p class="post-description-p"></p>
+              <p class="post-author-p"></p>
+              
+              <!-- Rating Stars Box -->
+              <div class='rating-widget star-rate'>
+                <div class='rating-stars text-center'>
+                  <ul id='stars'>
+                    <li class='star' title='Poor' data-value='1'>
+                      <i class='fa fa-star'></i>
+                    </li>
+                    <li class='star' title='Fair' data-value='2'>
+                      <i class='fa fa-star'></i>
+                    </li>
+                    <li class='star' title='Average' data-value='3'>
+                      <i class='fa fa-star'></i>
+                    </li>
+                    <li class='star' title='Good' data-value='4'>
+                      <i class='fa fa-star'></i>
+                    </li>
+                    <li class='star' title='Excellent' data-value='5'>
+                      <i class='fa fa-star'></i>
+                    </li>
+                  </ul>
+                </div>  
+              </div>
+              <!-- Rating Stars Box End-->
+  
+              <article class="comment-section">
+                <label class="comments">Comments:</label>
+                {% if request.user.is_authenticated %}
+                 <div class="comments-list">
+                    <p class="post-comment-p"></p>
+                 </div>
+                  <form method="POST">
+                    {{ form.comment }}
+                    <button class="btn btn-default mt-4 post-comment-button" name="comment">Post</button>
+                  </form>
+                {% else %}
+                
+                 <div class="comments-list">
+                    <p class="post-comment-p"></p>
+                 </div>
+                {% endif %}
+              </article>
+              
+            </div>
           </div>
-        </div>
+
       </div>
     </div>
   </div>
 </div>
 <!-- gallery end -->
-
 {% endblock blkContent %}

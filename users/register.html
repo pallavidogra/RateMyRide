@@ -1,0 +1,35 @@
+{% extends "main/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block blkContent %}
+
+<div class="heading text-center">
+  <h1>Join Today</h1>
+</div>
+
+<div class="row">
+  <div class="col-lg-8 col-md-12 col-12 offset-lg-2">
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        {{ dictForm|crispy }}
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-default" type="submit">
+          Sign Up
+        </button>
+      </div>
+    </form>
+
+    <div class="pt-3 text-center">
+      <p>
+        Already have an account? <a class="ml-2" href="{% url 'login' %}">Login Now</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+{% endblock blkContent %}
+    
