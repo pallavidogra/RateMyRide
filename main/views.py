@@ -25,7 +25,7 @@ def home(request):
     'form':form
   }
 
-  return render(request,'main/home.html', context)
+  return render(request,'home.html', context)
 
 def my_post(request):
   current_user = str(request.user)
@@ -35,7 +35,7 @@ def my_post(request):
     'keyPosts': filtered_posts
   }
 
-  return render(request,'main/home.html', context)
+  return render(request,'home.html', context)
 
 class PostDetailView(DetailView):
     model = Post
@@ -51,7 +51,7 @@ def PostCreateView(request):
   else:
     form = PostCreateForm()
 
-  return render(request, "main/post_form.html", {'form': form })
+  return render(request, "post_form.html", {'form': form })
 
 
 def PostUpdateView(request):
@@ -74,7 +74,7 @@ def PostUpdateView(request):
     def form_valid(self, form):
         form.instance.author = self.request.user
         #return super().form_valid(form)
-    return render(request, 'main/form_update.html')
+    return render(request, 'form_update.html')
       
 
 @login_required
@@ -164,4 +164,4 @@ def get_rating(request):
     return JsonResponse({'error': True})
 
 def about(request):
-  return render(request,'main/about.html', {'title': 'About'})
+  return render(request,'about.html', {'title': 'About'})
